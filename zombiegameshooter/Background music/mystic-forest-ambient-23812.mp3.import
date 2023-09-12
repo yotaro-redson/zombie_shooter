@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://67mlkd16f07o"
+path="res://.godot/imported/mystic-forest-ambient-23812.mp3-fabca50859cf067a7376e6da84ac5903.mp3str"
+
+[deps]
+
+source_file="res://Background music/mystic-forest-ambient-23812.mp3"
+dest_files=["res://.godot/imported/mystic-forest-ambient-23812.mp3-fabca50859cf067a7376e6da84ac5903.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

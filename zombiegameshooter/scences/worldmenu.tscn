@@ -1,0 +1,96 @@
+[gd_scene load_steps=20 format=3 uid="uid://cjvi3p4e2xm4a"]
+
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain.gd" id="3_hvcpg"]
+[ext_resource type="Resource" path="res://terrain data second/data.hterrain" id="4_pkg5m"]
+[ext_resource type="Script" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="5_sdbui"]
+[ext_resource type="Texture2D" uid="uid://c7aajretsb6lk" path="res://textures/all_ground/slot0_albedo_bump.png" id="6_txfv6"]
+[ext_resource type="Texture2D" uid="uid://c076suo8pola1" path="res://textures/all_ground/slot1_albedo_bump.png" id="7_yfunb"]
+[ext_resource type="Texture2D" uid="uid://v7dr8h42kyl8" path="res://textures/all_ground/slot2_albedo_bump.png" id="8_o706b"]
+[ext_resource type="Texture2D" uid="uid://75onykd8s0tu" path="res://textures/all_ground/slot0_normal_roughness.png" id="9_mup6y"]
+[ext_resource type="Texture2D" uid="uid://nrleq664hh1m" path="res://textures/all_ground/slot1_normal_roughness.png" id="10_pss5i"]
+[ext_resource type="Texture2D" uid="uid://cfr28j4shmnae" path="res://textures/all_ground/slot2_normal_roughness.png" id="11_3ntj8"]
+[ext_resource type="PackedScene" uid="uid://dqankclle2uxe" path="res://scences/campfire.tscn" id="12_ft0f2"]
+[ext_resource type="PackedScene" uid="uid://dn4lsdg1q2sy0" path="res://scences/camping_chair_free.tscn" id="13_6qpcj"]
+[ext_resource type="MeshLibrary" uid="uid://d24f87qd4vaih" path="res://meshlibrary/tree_low.meshlib" id="13_bf4qi"]
+[ext_resource type="PackedScene" uid="uid://cpmis227gtiuu" path="res://scences/camping_tent.tscn" id="14_ymebm"]
+
+[sub_resource type="Gradient" id="Gradient_hxha5"]
+colors = PackedColorArray(0, 0, 0, 1, 0.0415043, 0.0415087, 0.0415051, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vvd4h"]
+gradient = SubResource("Gradient_hxha5")
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_4ovcd"]
+night_sky = SubResource("GradientTexture2D_vvd4h")
+
+[sub_resource type="Sky" id="Sky_g3qns"]
+sky_material = SubResource("PhysicalSkyMaterial_4ovcd")
+
+[sub_resource type="Environment" id="Environment_clsfu"]
+background_mode = 2
+sky = SubResource("Sky_g3qns")
+fog_enabled = true
+fog_light_color = Color(0.219608, 0.243137, 0.278431, 1)
+fog_density = 0.04
+
+[sub_resource type="Resource" id="Resource_et418"]
+script = ExtResource("5_sdbui")
+mode = 0
+textures = [[ExtResource("6_txfv6"), ExtResource("7_yfunb"), ExtResource("8_o706b")], [ExtResource("9_mup6y"), ExtResource("10_pss5i"), ExtResource("11_3ntj8")]]
+
+[node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -83.3878, 0, 9.13371)
+
+[node name="Map" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.1597, 0, 167.265)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Map"]
+environment = SubResource("Environment_clsfu")
+
+[node name="HTerrain" type="Node3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4781, 0, 0)
+script = ExtResource("3_hvcpg")
+map_scale = Vector3(0.8, 1.5, 1.2)
+centered = true
+_terrain_data = ExtResource("4_pkg5m")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_et418")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale_per_texture = null
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+shader_params/u_globalmap_blend_start = null
+shader_params/u_globalmap_blend_distance = null
+shader_params/u_colormap_opacity_per_texture = null
+
+[node name="camping_tent" parent="Map" instance=ExtResource("14_ymebm")]
+transform = Transform3D(0.02, 0, 0, 0, 0.02, 0, 0, 0, 0.02, 165.144, 0, -199.054)
+
+[node name="camping_chair_free" parent="Map" instance=ExtResource("13_6qpcj")]
+transform = Transform3D(-0.0692483, 0, -0.0721434, 0, 0.1, 0, 0.0721434, 0, -0.0692483, 171.538, 0, -197.811)
+
+[node name="GridMap" type="GridMap" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 82.4781, -1.3, 0)
+mesh_library = ExtResource("13_bf4qi")
+data = {
+"cells": PackedInt32Array(43, 65506, 0, 43, 65478, 0, 31, 65480, 0, 30, 65480, 0, 29, 65480, 0, 26, 65477, 0, 26, 65476, 0, 18, 65479, 0, 18, 65480, 0, 17, 65480, 0, 20, 65499, 0, 22, 65502, 0, 23, 65503, 0, 23, 65505, 0, 23, 65506, 0, 22, 65506, 0, 36, 65494, 0, 36, 65493, 0, 37, 65493, 0, 41, 65493, 0, 45, 65493, 0, 47, 65493, 0, 53, 65492, 0, 51, 65511, 0, 50, 65513, 0, 49, 65514, 0, 48, 65516, 0, 48, 65517, 0, 38, 65521, 0, 37, 65521, 0, 36, 65521, 0, 34, 65519, 0, 11, 65501, 0, 11, 65500, 0, 5, 65491, 0, 8, 65455, 0, 8, 65454, 0, 19, 65451, 0, 22, 65461, 0, 23, 65462, 0, 37, 65462, 0, 14, 65432, 0, 17, 65437, 0, 25, 65436, 0, 65529, 65446, 0, 65529, 65436, 0, 3, 65450, 0, 65527, 65477, 0, 65526, 65477, 0, 15, 65474, 0, 1, 65461, 0, 0, 65461, 0, 2, 65476, 0, 65525, 65503, 0, 65524, 65497, 0, 65523, 65496, 0, 65521, 65490, 0, 65522, 65490, 0, 65532, 65491, 0, 65532, 65492, 0, 2, 65522, 0, 20, 65530, 0, 18, 65520, 0, 18, 65519, 0, 6, 65507, 0, 5, 65508, 0, 65526, 65510, 0, 46, 9, 0, 55, 6, 0, 54, 7, 0, 54, 8, 0, 55, 37, 0, 55, 38, 0, 44, 37, 0, 42, 37, 0, 41, 36, 0, 39, 36, 0, 22, 22, 0, 21, 21, 0, 20, 22, 0, 13, 34, 0, 13, 35, 0, 12, 40, 0, 12, 44, 0, 14, 63, 0, 14, 64, 0, 17, 68, 0, 41, 73, 0, 42, 72, 0, 44, 73, 0, 61, 77, 0, 62, 77, 0, 62, 76, 0, 39, 48, 0, 38, 47, 0, 37, 47, 0, 35, 49, 0, 33, 52, 0, 20, 58, 0, 19, 57, 0, 17, 57, 0, 16, 57, 0, 15, 56, 0, 13, 56, 0, 12, 56, 0, 10, 57, 0, 65523, 47, 0, 65521, 44, 0, 65521, 41, 0, 65521, 38, 0, 65524, 28, 0, 65523, 26, 0, 65524, 24, 0, 65524, 22, 0, 65519, 8, 0, 65518, 7, 0, 65517, 6, 0, 65517, 5, 0, 65517, 4, 0, 65516, 65534, 0, 65515, 65532, 0, 65514, 65530, 0, 65514, 65529, 0, 65514, 65481, 0, 65515, 65475, 0, 65516, 65468, 0, 65515, 65466, 0, 65515, 65465, 0, 65515, 65464, 0, 65515, 65461, 0, 65515, 65460, 0, 65515, 65457, 0, 65515, 65456, 0, 65515, 65451, 0, 65515, 65450, 0, 65515, 65449, 0, 65516, 65447, 0, 65517, 65446, 0, 65518, 65446, 0, 65520, 65450, 0, 65528, 65464, 0, 65526, 65465, 0, 65525, 65466, 0, 65523, 65472, 0, 65522, 65472, 0, 65522, 65473, 0, 65522, 65475, 0, 65522, 65477, 0, 65516, 65490, 0, 65515, 65490, 0, 65515, 65491, 0, 65512, 65498, 0, 65511, 65498, 0, 65511, 65500, 0, 65497, 65471, 0, 65495, 65465, 0, 65495, 65460, 0, 65496, 65454, 0, 65491, 65445, 0, 65477, 65457, 0, 65477, 65458, 0, 65479, 65458, 0, 65504, 65448, 0, 65504, 65450, 0, 65504, 65467, 0, 65503, 65470, 0, 65503, 65477, 0, 65502, 65480, 0, 65502, 65484, 0, 65501, 65488, 0, 65500, 65488, 0, 65497, 65489, 0, 65493, 65491, 0, 65491, 65491, 0, 65488, 65490, 0, 65485, 65489, 0, 65482, 65487, 0, 65482, 65485, 0, 65482, 65482, 0, 65481, 65482, 0, 65481, 65481, 0, 65482, 65476, 0, 65486, 65464, 0, 65491, 65480, 0, 65487, 65531, 0, 65482, 65530, 0, 65480, 65529, 0, 65478, 65529, 0, 65477, 65528, 0, 65478, 65525, 0, 65478, 65523, 0, 65478, 65518, 0, 65479, 65515, 0, 65480, 65513, 0, 65497, 65512, 0, 65499, 65512, 0, 65503, 65514, 0, 65508, 65515, 0, 65509, 65515, 0, 65510, 65516, 0, 65521, 65512, 0, 65522, 65512, 0, 65504, 3, 0, 65503, 4, 0, 65503, 5, 0, 65505, 24, 0, 65504, 29, 0, 65505, 35, 0, 65512, 49, 0, 65512, 58, 0, 65502, 82, 0, 65501, 82, 0, 65498, 80, 0, 65498, 76, 0, 65481, 41, 0, 65481, 38, 0, 65481, 36, 0, 65476, 28, 0, 65475, 27, 0, 65474, 27, 0, 65489, 19, 0, 65490, 19, 0, 65493, 32, 0, 65493, 38, 0, 65497, 49, 0, 65498, 56, 0, 65498, 57, 0, 65493, 60, 0, 65491, 59, 0, 65491, 56, 0, 65492, 52, 0, 65504, 8, 0, 65505, 8, 0, 65518, 17, 0, 65519, 18, 0, 7, 10, 0, 15, 45, 0, 1, 31, 0, 65532, 44, 0, 65531, 47, 0, 65531, 49, 0, 65529, 89, 0, 12, 80, 0, 40, 104, 0, 41, 106, 0, 19, 122, 0, 65530, 125, 0, 65529, 124, 0, 65530, 118, 0, 65517, 59, 0, 65528, 63, 0, 65519, 85, 0, 65517, 85, 0, 65517, 84, 0, 65512, 75, 0, 65511, 73, 0, 65503, 94, 0, 65501, 93, 0, 65500, 93, 0, 65499, 93, 0, 65473, 72, 0, 65472, 71, 0, 65471, 71, 0, 65471, 68, 0, 65470, 58, 0, 65470, 57, 0, 65470, 52, 0, 65470, 51, 0, 65470, 50, 0, 65470, 49, 0, 65463, 25, 0, 65463, 24, 0, 65463, 22, 0, 65469, 6, 0, 65469, 5, 0, 65468, 65535, 0, 65468, 65525, 0, 65468, 65521, 0, 65468, 65515, 0, 65468, 65513, 0, 65470, 65508, 0, 65477, 65487, 0, 65475, 65470, 0, 65474, 65469, 0, 65473, 65468, 0, 65472, 65464, 0, 65472, 65463, 0, 65471, 65460, 0, 65472, 65460, 0, 65479, 65489, 0, 65479, 65490, 0, 65480, 65494, 0, 65490, 65505, 0, 65497, 2, 0, 65496, 10, 0, 65498, 26, 0, 65496, 38, 0, 65496, 40, 0, 65486, 112, 0, 65485, 81, 0, 65485, 80, 0, 65485, 84, 0, 65484, 94, 0, 65484, 97, 0, 65484, 99, 0, 65483, 106, 0, 65488, 112, 0, 65490, 115, 0, 65491, 116, 0, 65492, 117, 0, 65496, 119, 0, 65498, 118, 0, 65500, 119, 0, 65505, 120, 0, 65509, 120, 0, 65510, 119, 0, 65517, 124, 0, 65519, 127, 0, 65522, 132, 0, 65523, 132, 0, 65523, 133, 0, 65509, 141, 0, 65506, 140, 0, 65505, 139, 0, 65504, 138, 0, 65498, 134, 0, 65496, 133, 0, 65492, 129, 0, 65490, 128, 0, 65491, 124, 0, 65494, 111, 0, 65494, 110, 0, 65495, 108, 0, 65499, 104, 0, 65506, 97, 0, 65508, 97, 0, 65510, 98, 0, 65510, 97, 0, 65514, 91, 0, 65520, 89, 0, 65524, 86, 0, 11, 103, 0, 5, 120, 0, 4, 132, 0, 2, 139, 0, 65526, 105, 0, 65522, 106, 0, 65522, 107, 0, 65518, 105, 0, 65517, 105, 0, 65517, 103, 0, 65515, 102, 0, 65513, 100, 0, 65512, 100, 0, 65527, 104, 0, 65532, 105, 0, 2, 108, 0, 5, 108, 0, 14, 108, 0, 16, 107, 0, 17, 108, 0, 21, 105, 0, 27, 97, 0, 28, 95, 0, 27, 93, 0, 29, 84, 0, 56, 88, 0, 54, 89, 0, 54, 91, 0, 51, 94, 0, 36, 70, 0, 35, 69, 0, 41, 63, 0, 42, 63, 0, 47, 62, 0, 50, 61, 0, 51, 59, 0, 52, 48, 0, 53, 48, 0, 58, 47, 0, 57, 49, 0, 56, 51, 0, 56, 52, 0, 55, 52, 0, 54, 51, 0, 52, 50, 0, 65520, 65528, 0, 65522, 65526, 0, 65527, 65526, 0, 65528, 65524, 0, 65529, 65521, 0, 65520, 65521, 0, 65519, 65521, 0, 65503, 65529, 0, 65493, 65528, 0, 65492, 65527, 0, 65491, 65527, 0, 65491, 65526, 0, 65492, 65524, 0, 65491, 65523, 0, 65490, 65519, 0, 65489, 65517, 0, 65488, 65509, 0, 65487, 65509, 0, 65487, 65508, 0, 65487, 65507, 0, 65485, 65503, 0, 65484, 65502, 0, 65483, 65501, 0, 65483, 65500, 0, 65480, 17, 0, 65476, 16, 0, 65471, 22, 0, 65471, 25, 0)
+}
+
+[node name="campfire" parent="Map" instance=ExtResource("12_ft0f2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 168.812, 0, -193.451)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Map/campfire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+light_color = Color(1, 0.611765, 0.2, 1)
+light_energy = 10.0
+light_size = 0.054
+omni_range = 7.005
+omni_attenuation = 0.203063

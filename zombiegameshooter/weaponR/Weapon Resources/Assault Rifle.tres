@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://bkvy13oqbpxk6"]
+
+[ext_resource type="Script" path="res://weaponR/Weapon_Resource.gd" id="1_0tip3"]
+
+[resource]
+script = ExtResource("1_0tip3")
+Weapon_Name = "Assault Rifle"
+Activate_ani = "AutoActivate"
+Shoot_ani = "AutoShoot"
+Deactivate_ani = "AutoDeactivate"
+Reload_ani = "AutoReload"
+OutofAmmo_ani = "AutoReload"
+Current_Ammo = 28
+Reserve_Ammo = 60
+Magazine = 28
+Max_Ammo = 56
+Auto_Fire = true
+Type = 1

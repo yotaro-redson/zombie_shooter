@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Weapon_Resource" load_steps=2 format=3 uid="uid://82vm0cfh4aq4"]
+
+[ext_resource type="Script" path="res://weaponR/Weapon_Resource.gd" id="1_jiesh"]
+
+[resource]
+script = ExtResource("1_jiesh")
+Weapon_Name = "Shorty"
+Activate_ani = "ShotActivate"
+Shoot_ani = "ShotShoot"
+Deactivate_ani = "ShotDeactivate"
+Reload_ani = "ShotReload"
+OutofAmmo_ani = "ShotReload"
+Current_Ammo = 8
+Reserve_Ammo = 8
+Magazine = 8
+Max_Ammo = 16
+Auto_Fire = false
+Type = 2
