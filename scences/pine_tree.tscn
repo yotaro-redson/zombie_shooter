@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://chapiyhcyrxst"]
+
+[ext_resource type="PackedScene" uid="uid://d3l6nuljbm6jk" path="res://models/pine_tree.glb" id="1_25l7f"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_rvbfd"]
+height = 263.891
+radius = 28.2512
+
+[node name="pine_tree" instance=ExtResource("1_25l7f")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Sketchfab_model/Pine_fbx/RootNode/Tree_0/Tree_0_Tree_0Mat_0" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 123.201, -2.73562e-14)
+shape = SubResource("CylinderShape3D_rvbfd")
