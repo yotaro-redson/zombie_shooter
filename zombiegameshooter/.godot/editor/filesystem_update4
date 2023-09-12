@@ -1,0 +1,10 @@
+res://scences/world.tscn
+res://Player/Character.tscn
+res://Spawnable_Weapons/Ammo.tscn
+res://scences/worldmenu.tscn
+res://scences/winmenu.tscn
+res://scences/mainmenu.tscn
+res://scences/death_screen.tscn
+res://Zoombie/z_walker.tscn
+res://Zoombie/Zrunner.tscn
+res://Zoombie/crawler.tscn
